@@ -1,0 +1,86 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.card h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.form input:focus {
+  border-color: #5f27cd;
+  box-shadow: 0 0 0 2px rgba(95, 39, 205, 0.2);
+  outline: none;
+}
+
+.form button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background-color: #5f27cd;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #341f97;
+  transform: translateY(-2px);
+}
+
+/* 📱 Ajustes para telas pequenas */
+@media (max-width: 480px) {
+  .card {
+    padding: 25px;
+    border-radius: 12px;
+  }
+
+  .card h2 {
+    font-size: 20px;
+  }
+
+  .form input,
+  .form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
