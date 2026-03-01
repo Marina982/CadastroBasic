@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST");
@@ -13,10 +16,13 @@ try {
     $conn = new PDO("pgsql:host=$host;dbname=$db", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Mensagem de sucesso no console
-    echo "✅ Conexão estabelecida com o banco de dados!\n";
+    $input = file_get_contents("php://input");
+    $data = json_decode($input, true);
 
-    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) {
+        echo json_encode(["message" => "Nenhum JSON recebido", "raw" => $input]);
+        exit;
+    }
 
     $sql = "INSERT INTO pessoas (nome, data_nascimento, cpf)
             VALUES (:nome, :data_nascimento, :cpf)";
@@ -29,7 +35,7 @@ try {
     ]);
 
     echo json_encode(["message" => "Cadastro realizado com sucesso"]);
+
 } catch (PDOException $e) {
-    echo "❌ Erro de conexão: " . $e->getMessage() . "\n";
     echo json_encode(["message" => "Erro: " . $e->getMessage()]);
 }

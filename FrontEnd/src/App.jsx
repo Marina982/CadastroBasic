@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "./styles/App.module.css";
+import DadosCad from "./Pages/DadosCad";
+
 
 function App() {
   const [form, setForm] = useState({
@@ -18,22 +20,28 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost/cadastro.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(form)
-    });
+    try {
+      const response = await fetch("http://localhost:8000/cadastro.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
 
-    const data = await response.json();
-    alert(data.message);
+      const data = await response.json(); // 
+      alert(data.message);
 
-    setForm({
-      nome: "",
-      data_nascimento: "",
-      cpf: ""
-    });
+      setForm({
+        nome: "",
+        data_nascimento: "",
+        cpf: ""
+      });
+
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao conectar com o servidor");
+    }
   };
 
   return (
@@ -71,6 +79,7 @@ function App() {
           <button type="submit">Cadastrar</button>
         </form>
       </div>
+      <DadosCad />
     </div>
   );
 }
