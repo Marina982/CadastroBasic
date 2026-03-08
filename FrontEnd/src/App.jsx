@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./styles/App.module.css";
-import DadosCad from "./Pages/DadosCad";
+
 
 
 function App() {
@@ -77,9 +77,9 @@ function App() {
           />
 
           <button type="submit">Cadastrar</button>
+          <a href="/Dados" className={styles.link}>Pessoas Cadastradas</a>
         </form>
       </div>
-      <DadosCad />
     </div>
   );
 }
