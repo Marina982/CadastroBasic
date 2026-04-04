@@ -10,7 +10,7 @@ function DadosCad() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:8000/listar.php");
+      const response = await fetch("http://localhost:8080/api/pessoas"); 
       const data = await response.json();
       setPessoas(data);
     } catch (error) {
@@ -22,11 +22,11 @@ function DadosCad() {
     if (!window.confirm("Deseja realmente apagar esta pessoa?")) return;
 
     try {
-      await fetch("http://localhost:8000/deletar.php?id=" + id, {
+      await fetch("http://localhost:8080/api/pessoas/" + id, {
         method: "DELETE",
       });
 
-      fetchData(); // atualiza lista
+      fetchData();
     } catch (error) {
       console.error("Erro ao deletar:", error);
     }
